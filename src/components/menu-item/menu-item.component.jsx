@@ -1,8 +1,9 @@
 import React from "react";
 import "./menu-item.styles.scss";
+import {withRouter, Link} from 'react-router-dom';
 
-const MenuItem = ({ title, imageUrl, size }) => (
-  <div className={`${size} menu-item`}>
+const MenuItem = ({ title, imageUrl, size, history, linkUrl, match }) => (
+  <div className={`${size} menu-item`} onClick={() =>history.push(`${match.url}${linkUrl}`)}>
     <div
       className="background-image"
       style={{
@@ -14,6 +15,8 @@ const MenuItem = ({ title, imageUrl, size }) => (
       <span className="subtitle">Shop now</span>
     </div>
   </div>
-);
-
-export default MenuItem;
+); 
+//because Route only wrap its mother: Homepage Componet, so inorder to have 'history' property, withRouter function can help. And
+//it is called HOC (Higer Order Component)
+export default withRouter(MenuItem);
+//export default MenuItem;

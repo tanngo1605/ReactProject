@@ -9,9 +9,18 @@ exact: match the exact URL
 function App() {
   return (
     <div>
-     < HomePage />
+    <Switch>
+    <Route exact path="/" component={HomePage}></Route>
+    <Route exact path="/shop/hats" component={Hat}></Route>
+    
+    </Switch>
     </div>
   );
+}
+function Hat(){
+  return (
+    <div>Hats</div>
+  )
 }
 
 export default App;
