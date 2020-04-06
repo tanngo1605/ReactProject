@@ -1,0 +1,30 @@
+
+
+.header {
+  height: 70px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+
+  .logo-container {
+    height: 100%;
+    width: 70px;
+    padding: 25px;
+    animation: cubic-bezier(0,0,0,0) 5s infinite linear;
+  }
+  
+  
+
+  .options {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;/*most right side*/
+
+    .option {
+      padding: 10px 15px;
+    }
+  }
+}
