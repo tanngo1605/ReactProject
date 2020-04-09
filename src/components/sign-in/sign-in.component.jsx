@@ -3,6 +3,9 @@ import React from "react";
 import "./sign-in.styles.scss";
 import FormInput from "../../components/form-input/form-input.component";
 import CustomeButton from "../custom-button/custom-button.component";
+
+import { signinWithGG } from "../../firebase/firebase.utils";
+
 class SignIn extends React.Component {
   constructor(props) {
     super(props);
@@ -12,15 +15,15 @@ class SignIn extends React.Component {
       password: "",
     };
   }
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     event.preventDefault();
 
-    this.setState({ email: '', password: '' });
+    this.setState({ email: "", password: "" });
   };
 
-  handleChange = event => {
+  handleChange = (event) => {
     const { value, name } = event.target;
-    console.log(value, name)
+    console.log(value, name);
 
     this.setState({ [name]: value });
   };
@@ -48,8 +51,12 @@ class SignIn extends React.Component {
             label="password"
             required
           />
-
-         <CustomeButton type="submit">SIGN IN</CustomeButton>
+          <div className="buttons">
+            <CustomeButton type="submit">SIGN IN</CustomeButton>
+            <CustomeButton isGoogleSignIn onClick={signinWithGG}>
+              GOOGLE SIGNIN
+            </CustomeButton>
+          </div>
         </form>
       </div>
     );
