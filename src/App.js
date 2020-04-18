@@ -22,10 +22,12 @@ constructor(){
 //unsubscribeFromAuth = null;
 componentDidMount(){
   console.log("ComponentDidMount");
-  //this.unsubscribeFromAuth= 
-  auth.onAuthStateChanged( async userAuth =>{ //this function is called -> setState is called -> render is called
+  this.unsubscribeFromAuth=auth.onAuthStateChanged( async userAuth =>{ //this function is called -> setState is called -> render is called
+  
     console.log('User: ' + userAuth)
     if(userAuth){
+      const nameUser =  userAuth.displayName;
+      console.log('User: ' + nameUser)
       const userRef = await createUserProfile(userAuth);
       userRef.onSnapshot(snapShot =>{
         this.setState({
@@ -37,14 +39,18 @@ componentDidMount(){
       })
     }
     else
-    this.setState({currentUser: userAuth})
+   {this.setState({currentUser: userAuth});
+   console.log("sign out")}
 
   })
 }
 
 componentWillUnmount(){
   console.log("ComponentWillUnmount");
- // this.unsubscribeFromAuth();
+  this.unsubscribeFromAuth();
+  //Calling the unsubscribe function when the component is about to
+  // unmount is the best way to make sure we don't get any memory leaks in our application related 
+  //to listeners still being open even if the component that cares about the listener is no longer on the page.
 }
 
   render() {
