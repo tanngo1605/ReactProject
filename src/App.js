@@ -21,20 +21,34 @@ constructor(){
 }
 //unsubscribeFromAuth = null;
 componentDidMount(){
-  this.unsubscribeFromAuth= auth.onAuthStateChanged( async user =>{
-    //this.setState({currentUser: user});
-    createUserProfile(user);
-    
-    console.log(user);
+  console.log("ComponentDidMount");
+  //this.unsubscribeFromAuth= 
+  auth.onAuthStateChanged( async userAuth =>{ //this function is called -> setState is called -> render is called
+    console.log('User: ' + userAuth)
+    if(userAuth){
+      const userRef = await createUserProfile(userAuth);
+      userRef.onSnapshot(snapShot =>{
+        this.setState({
+          currentUser: {
+            id: snapShot.id,
+            ...snapShot.data()
+          }
+        })
+      })
+    }
+    else
+    this.setState({currentUser: userAuth})
 
   })
 }
 
 componentWillUnmount(){
-  this.unsubscribeFromAuth();
+  console.log("ComponentWillUnmount");
+ // this.unsubscribeFromAuth();
 }
 
   render() {
+    console.log("Render...")
     return (
       <div>
         <Header currentUser={this.state.currentUser} />{" "}
@@ -43,16 +57,12 @@ componentWillUnmount(){
           <Route exact path="/" component={HomePage}></Route>
           <Route exact path="/shop" component={ShopPage}></Route>
           <Route exact path="/signin" component={SignInAndSignUpPage}></Route>
-          <Route exact path="/shop/sneakers" component={CC}></Route>
+          
         </Switch>
       </div>
     );
   }
 }
-function CC (){
-  return(
-    <div>CC Duma</div>
-  )
-}
+
 
 export default App;
