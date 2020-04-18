@@ -11,7 +11,18 @@
     height: 100%;
     width: 70px;
     padding: 25px;
-    animation: cubic-bezier(0,0,0,0) 5s infinite linear;
+   
+  }
+  .logo-container{
+    .logo:hover{
+        transform: rotate(720deg);
+        transition: 10s;
+    }
+    .logo{
+      transform: rotate(-720deg);
+      transition: 10s;
+  }
+    
   }
   
   

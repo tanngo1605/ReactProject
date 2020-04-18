@@ -5,7 +5,7 @@ import HomePage from "./pages/homepage/homepage.component";
 import ShopPage from "./pages/shop/shop.component";
 import Header from "./components/header/header.component";
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
-import { auth } from "./firebase/firebase.utils";
+import { auth, createUserProfile } from "./firebase/firebase.utils";
 
 /*
 Switch: match the first URL that match
@@ -21,8 +21,10 @@ constructor(){
 }
 //unsubscribeFromAuth = null;
 componentDidMount(){
-  this.unsubscribeFromAuth= auth.onAuthStateChanged(user =>{
-    this.setState({currentUser: user});
+  this.unsubscribeFromAuth= auth.onAuthStateChanged( async user =>{
+    //this.setState({currentUser: user});
+    createUserProfile(user);
+    
     console.log(user);
 
   })
@@ -41,10 +43,16 @@ componentWillUnmount(){
           <Route exact path="/" component={HomePage}></Route>
           <Route exact path="/shop" component={ShopPage}></Route>
           <Route exact path="/signin" component={SignInAndSignUpPage}></Route>
+          <Route exact path="/shop/sneakers" component={CC}></Route>
         </Switch>
       </div>
     );
   }
+}
+function CC (){
+  return(
+    <div>CC Duma</div>
+  )
 }
 
 export default App;
