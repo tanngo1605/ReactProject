@@ -6,11 +6,17 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 25px;
+  transition: 1s;
+  background-color: gray;
+   
+  
 
   .logo-container {
     height: 100%;
     width: 70px;
-    padding: 25px;
+    padding: 20px;
+    
+    align-items: center;
    
   }
   .logo-container{
@@ -37,6 +43,14 @@
     .option {
       padding: 10px 15px;
       cursor: pointer;
+     
+    }
+    .option:hover {
+      padding: 10px 15px;
+      cursor: pointer;
+      color: wheat;
+      transition: 1s;
+     
     }
   }
 }

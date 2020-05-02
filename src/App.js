@@ -55,12 +55,13 @@ componentWillUnmount(){
 
   render() {
     console.log("Render...")
+    //divide the app into pages (functional component)-> container componets -> smaller component -> indivial component
     return (
       <div>
         <Header currentUser={this.state.currentUser} />{" "}
         {/*set outside the Swith so the Header will always be there*/}
         <Switch>
-          <Route exact path="/" component={HomePage}></Route>
+          <Route exact path="/" component={HomePage}></Route> 
           <Route exact path="/shop" component={ShopPage}></Route>
           <Route exact path="/signin" component={SignInAndSignUpPage}></Route>
           
