@@ -5,8 +5,10 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import * as serviceWorker from "./serviceWorker";
 import {Provider} from "react-redux";
+
+import store from './redux/store';
 ReactDOM.render(
-  <Provider> {/*globally store redix*/}
+  <Provider store={store} > {/*globally store redix*/}
   <BrowserRouter>
     <App />
   </BrowserRouter>

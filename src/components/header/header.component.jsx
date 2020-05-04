@@ -1,6 +1,8 @@
 import React from "react";
 import "./header.styles.scss";
 import { Link } from "react-router-dom";
+import {connect} from 'react-redux'; //connect is a HOC that lets use modify our 
+//component to have access to things related to redux
 
 import { ReactComponent as Logo } from "../../asset/logo.svg";
 import {auth} from "../../firebase/firebase.utils";
@@ -32,5 +34,8 @@ const Header = ({currentUser}) => (
     </div>
   </div>
 );
+const mapStateToProps = state => ({ //this state is in root-reducer(file root-reducer)
+  currentUser: state.user.currentUser
+})
 
-export default Header;
+export default  connect(mapStateToProps)(Header);
