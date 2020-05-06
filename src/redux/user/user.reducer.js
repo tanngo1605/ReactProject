@@ -2,7 +2,7 @@
 it going to be nothing. We want to mkae sure to initialize a state
 Just like contructor in class
 */
-
+import {UserActionTypes} from './user.types';
 const INITIAL_STATE = {
   currentUser: null,
 };
@@ -10,7 +10,7 @@ const INITIAL_STATE = {
 //defalut value
 const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case "SET_CURRENT_USER":
+    case UserActionTypes.SET_CURRENT_USER:
       return {
         ...state,
         currentUser: action.payload,

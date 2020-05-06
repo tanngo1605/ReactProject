@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import HomePage from "./pages/homepage/homepage.component";
 import ShopPage from "./pages/shop/shop.component";
 import Header from "./components/header/header.component";
@@ -58,17 +58,21 @@ componentWillUnmount(){
         <Header/>{" "}
         {/*set outside the Swith so the Header will always be there*/}
         <Switch>
-          <Route exact path="/" component={HomePage}></Route> 
-          <Route exact path="/shop" component={ShopPage}></Route>
-          <Route exact path="/signin" component={SignInAndSignUpPage}></Route>
-          
+        <Route exact path="/" component={HomePage}></Route> 
+        <Route exact path="/shop" component={ShopPage}></Route>
+    {/*if they already sign in, they cannot go to Sign In page*/}
+       <Route exact path='/signin' 
+       render={() => this.props.currentUser ? (<Redirect to ='/'/>) : <SignInAndSignUpPage/>} />
         </Switch>
+        
       </div>
     );
   }
 }
-
+const mapStateToProps = ({user}) =>({
+  currentUser: user.currentUser
+})
 const mapDispatchToProps = dispatch =>({
    setCurrentUser: user => dispatch(setCurrentUser(user)) //create action to change the STORE
 })
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
