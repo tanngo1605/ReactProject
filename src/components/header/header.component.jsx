@@ -35,7 +35,7 @@ const Header = ({currentUser}) => (
   </div>
 );
 const mapStateToProps = state => ({ //this state is in root-reducer(file root-reducer)
-  currentUser: state.user.currentUser
+  currentUser: state.user.currentUser //read the props from the store
 })
 
 export default  connect(mapStateToProps)(Header);

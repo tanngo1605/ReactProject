@@ -18,7 +18,7 @@ class App extends React.Component {
 
 //unsubscribeFromAuth = null;
 componentDidMount(){
-  console.log("ComponentDidMount");
+  console.log("ComponentDidMount"); //userAuth = userObject
   this.unsubscribeFromAuth=auth.onAuthStateChanged( async userAuth =>{ //this function is called -> setState is called -> render is called
   const {setCurrentUser} = this.props;
     console.log('User: ' + userAuth)
@@ -69,6 +69,6 @@ componentWillUnmount(){
 }
 
 const mapDispatchToProps = dispatch =>({
-   setCurrentUser: user => dispatch(setCurrentUser(user))
+   setCurrentUser: user => dispatch(setCurrentUser(user)) //create action to change the STORE
 })
 export default connect(null, mapDispatchToProps)(App);
