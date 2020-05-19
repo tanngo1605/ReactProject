@@ -3,6 +3,8 @@ it going to be nothing. We want to mkae sure to initialize a state
 Just like contructor in class
 */
 import {UserActionTypes} from './user.types';
+
+
 const INITIAL_STATE = {
   currentUser: null,
 };
