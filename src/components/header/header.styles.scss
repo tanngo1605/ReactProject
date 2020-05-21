@@ -2,11 +2,18 @@
 
 .header {
   height: 70px;
-  width: 100%;
+  width: 110%;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 25px;
+  margin-bottom: 50px;
   transition: 1s;
+  top: 0px;
+  position: fixed;
+  right: 10px;
+  z-index: 1;
+  background-color: rgb(192, 186, 186);
+
+
   
    
   
@@ -17,6 +24,7 @@
     padding: 20px;
     
     align-items: center;
+     margin-left: 200px;
    
   }
   .logo-container{
