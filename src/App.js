@@ -5,9 +5,14 @@ import HomePage from "./pages/homepage/homepage.component";
 import ShopPage from "./pages/shop/shop.component";
 import Header from "./components/header/header.component";
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
+import CheckOutPage from './pages/checkout/checkout.component'
+
 import { auth, createUserProfile } from "./firebase/firebase.utils";
 import {connect} from 'react-redux';
 import {setCurrentUser} from './redux/user/user.actions';
+import {selectCurrentUser} from './redux/user/user.selector';
+import {createStructuredSelector} from 'reselect';
+import Ripple from 'react-ripples';
 
 /*
 Switch: match the first URL that match
@@ -59,18 +64,19 @@ componentWillUnmount(){
         {/*set outside the Swith so the Header will always be there*/}
         <Switch>
         <Route exact path="/" component={HomePage}></Route> 
-        <Route exact path="/shop" component={ShopPage}></Route>
+        <Route  path="/shop" component={ShopPage}></Route>
     {/*if they already sign in, they cannot go to Sign In page*/}
        <Route exact path='/signin' 
        render={() => this.props.currentUser ? (<Redirect to ='/'/>) : <SignInAndSignUpPage/>} />
-        </Switch>
+       <Route exact path = '/checkout' component={CheckOutPage}></Route>
+       </Switch>
         
       </div>
     );
   }
 }
-const mapStateToProps = ({user}) =>({
-  currentUser: user.currentUser
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser
 })
 const mapDispatchToProps = dispatch =>({
    setCurrentUser: user => dispatch(setCurrentUser(user)) //create action to change the STORE

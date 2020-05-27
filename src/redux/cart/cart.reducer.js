@@ -1,5 +1,5 @@
 import CartActionTypes from "./cart.types";
-import {addItemToCart} from './cart.util';
+import {addItemToCart, removeItemFromCart} from './cart.util';
 
 
 const INITIAL_STATE = {//this is just the state for cart prop in the store
@@ -20,6 +20,19 @@ const cartReducer = (state = INITIAL_STATE, action) => {
         ...state,
         cartItems: addItemToCart(state.cartItems, action.payload ) //spreading old elements and add one more
       };
+
+    case CartActionTypes.CLEAR_ITEM_FROM_CART:
+      return {
+        ...state,
+        cartItems: state.cartItems.filter(item => item.id != action.payload.id)
+      };
+
+    case CartActionTypes.REMOVE_ITEM:
+      return{
+        ...state,
+        cartItems: removeItemFromCart(state.cartItems, action.payload)
+
+      }  ;
     default:
       return state;
   }

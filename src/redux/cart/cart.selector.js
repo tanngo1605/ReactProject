@@ -10,6 +10,10 @@ export const selectCartItems = createSelector(
     (cart) => cart.cartItems
 );
 
+export const selectCartHidden = createSelector(
+    [selectCart],
+    cart => cart.hidden
+)
 
 export const selectCartItemsCount = createSelector(
    [selectCartItems],
@@ -19,3 +23,10 @@ export const selectCartItemsCount = createSelector(
 
 //flow: when the state is inserted into selectCartItemsCount, then go back to selectCartItems, 
 //then go back to selectCart...
+
+export const selectCartTotal = createSelector(
+   [selectCartItems],
+   cartItems => cartItems.reduce((accum, cartItem) =>
+   accum+ cartItem.quantity*cartItem.price  ,0)
+
+)
