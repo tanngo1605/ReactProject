@@ -3,13 +3,13 @@
 //display them
 //action -> middleware -> root reducer
 import {createStore, applyMiddleware} from 'redux';
-
+import {persistStore} from 'redux-persist';//allow browser to cache the store
 import logger from 'redux-logger';
 
 import rootReducer  from './root-reducer';
 
 const middlewares = [logger];//more things will be added
 
-const store = createStore(rootReducer, applyMiddleware(...middlewares));
-
-export default store;
+export const store = createStore(rootReducer, applyMiddleware(...middlewares));
+export const persistor = persistStore(store);
+//export default store;
