@@ -3,16 +3,17 @@ import "./header.styles.scss";
 import { Route, Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux"; //connect is a HOC that lets use modify our
 //component to have access to things related to redux
-import {createStructuredSelector} from 'reselect';
+import { createStructuredSelector } from "reselect";
 import CartDropDown from "../cart-dropdown/cart-dropdown.component";
 import { ReactComponent as Logo } from "../../asset/logo.svg";
 import { auth } from "../../firebase/firebase.utils";
 import CartIcon from "../cart-icon/cart-icon.component";
-import {selectCartHidden} from '../../redux/cart/cart.selector';
-import {selectCurrentUser} from '../../redux/user/user.selector';
+import { selectCartHidden } from "../../redux/cart/cart.selector";
+import { selectCurrentUser } from "../../redux/user/user.selector";
+import { clearAll } from "../../redux/cart/cart.action";
 
 const SignInAlert = () => <div>Please Sign In</div>;
-const Header = ({ currentUser, hidden }) => (
+const Header = ({ currentUser, hidden, clearAll }) => (
   <div className="header">
     <Link class="logo-container" to="/">
       <Logo className="logo"></Logo>
@@ -27,7 +28,13 @@ const Header = ({ currentUser, hidden }) => (
       </Link>
 
       {currentUser ? (
-        <div className="option" onClick={() => auth.signOut()}>
+        <div
+          className="option"
+          onClick={() => {
+            clearAll();
+            auth.signOut();
+          }}
+        >
           {" "}
           SIGN OUT
         </div>
@@ -37,7 +44,9 @@ const Header = ({ currentUser, hidden }) => (
         </Link>
       )}
       {currentUser ? (
-        <div className="option">{currentUser.displayName.toUpperCase()}</div>
+        <div className="option">
+          <Link to="/checkout">{currentUser.displayName.toUpperCase()}</Link>
+        </div>
       ) : null}
       <CartIcon />
     </div>
@@ -50,9 +59,14 @@ const Header = ({ currentUser, hidden }) => (
   //read the props from the store
   hidden: selectCartHidden(state),
 });*/
-const mapStateToProps = createStructuredSelector({//auto input state
+const mapStateToProps = createStructuredSelector({
+  //auto input state
   currentUser: selectCurrentUser,
-  hidden: selectCartHidden
-})
+  hidden: selectCartHidden,
+});
 
-export default connect(mapStateToProps)(Header);
+const mapDispatchToProps = (dispatch) => ({
+  clearAll: () => dispatch(clearAll()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
