@@ -8,8 +8,9 @@ import {
   selectCartTotal,
   selectCartItemsCount,
 } from "../../redux/cart/cart.selector";
+import StripeCheckoutButton from "../../components/stripe-button/stripe-button.component";
 
-import {clearAll} from '../../redux/cart/cart.action';
+import { clearAll } from "../../redux/cart/cart.action";
 import CheckoutItem from "../../components/checkout-item/checkout-item.component";
 const CheckoutPage = ({ cartItems, total, totalItem, clearAll }) => (
   <div className="checkout-page">
@@ -38,9 +39,24 @@ const CheckoutPage = ({ cartItems, total, totalItem, clearAll }) => (
         TOTAL:${total}(Total items: {totalItem})
       </span>
     </div>
-    {cartItems.length?
-    <div className="clear-all" onClick={() => clearAll()}>CLEAR ALL</div>
-    :null}
+    {cartItems.length ? (
+      <div className="clear-all" onClick={() => clearAll()}>
+        CLEAR ALL
+      </div>
+    ) : null}
+    
+    <div className="test-warning" style={{
+      color: 'red',
+      fontSize: '24px'
+    }}>
+      Please use these information for demo: credit card: 4242 4242 4242 4241
+      CVV: 123 Date: any future Date
+    </div>
+    {total?
+    <div style={{
+      marginLeft: 'auto',
+      marginTop: '50px'
+    }}><StripeCheckoutButton price={total} /></div> : null}
   </div>
 );
 
@@ -50,7 +66,7 @@ const mapStateToProps = createStructuredSelector({
   totalItem: selectCartItemsCount,
 });
 
-const mapDispatchToProps = dispatch =>({
-  clearAll: () => dispatch(clearAll())
-})
+const mapDispatchToProps = (dispatch) => ({
+  clearAll: () => dispatch(clearAll()),
+});
 export default connect(mapStateToProps, mapDispatchToProps)(CheckoutPage);

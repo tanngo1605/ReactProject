@@ -12,7 +12,7 @@ import {connect} from 'react-redux';
 import {setCurrentUser} from './redux/user/user.actions';
 import {selectCurrentUser} from './redux/user/user.selector';
 import {createStructuredSelector} from 'reselect';
-import Ripple from 'react-ripples';
+
 
 /*
 Switch: match the first URL that match
