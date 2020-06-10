@@ -44,19 +44,28 @@ const CheckoutPage = ({ cartItems, total, totalItem, clearAll }) => (
         CLEAR ALL
       </div>
     ) : null}
-    
-    <div className="test-warning" style={{
-      color: 'red',
-      fontSize: '24px'
-    }}>
+    {total ? (
+      <div
+        style={{
+          marginLeft: "auto",
+          marginTop: "50px",
+        }}
+      >
+        <StripeCheckoutButton price={total} />
+      </div>
+    ) : (
+      <img src="https://i.pinimg.com/originals/2e/ac/fa/2eacfa305d7715bdcd86bb4956209038.png" />
+    )}
+    <div
+      className="test-warning"
+      style={{
+        color: "red",
+        fontSize: "14px",
+      }}
+    >
       Please use these information for demo: credit card: 4242 4242 4242 4241
       CVV: 123 Date: any future Date
     </div>
-    {total?
-    <div style={{
-      marginLeft: 'auto',
-      marginTop: '50px'
-    }}><StripeCheckoutButton price={total} /></div> : null}
   </div>
 );
 
