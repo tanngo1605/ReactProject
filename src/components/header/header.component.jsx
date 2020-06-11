@@ -11,24 +11,26 @@ import CartIcon from "../cart-icon/cart-icon.component";
 import { selectCartHidden } from "../../redux/cart/cart.selector";
 import { selectCurrentUser } from "../../redux/user/user.selector";
 import { clearAll } from "../../redux/cart/cart.action";
+import {
+  HeaderContrainer,
+  LogoContainer,
+  OptionsContainer,
+  OptionDiv,
+  OptionLink,
+} from "./header.styles";
 
-const SignInAlert = () => <div>Please Sign In</div>;
 const Header = ({ currentUser, hidden, clearAll }) => (
-  <div className="header">
-    <Link class="logo-container" to="/">
+  <HeaderContrainer>
+    <LogoContainer to="/">
       <Logo className="logo"></Logo>
-    </Link>
+    </LogoContainer>
 
-    <div className="options">
-      <Link className="option" to="/shop">
-        SHOP
-      </Link>
-      <Link className="option" to="/shop">
-        CONTACT
-      </Link>
+    <OptionsContainer>
+      <OptionLink to="/shop">SHOP</OptionLink>
+      <OptionLink to="/shop">CONTACT</OptionLink>
 
       {currentUser ? (
-        <div
+        <OptionDiv
           className="option"
           onClick={() => {
             clearAll();
@@ -37,21 +39,21 @@ const Header = ({ currentUser, hidden, clearAll }) => (
         >
           {" "}
           SIGN OUT
-        </div>
+        </OptionDiv>
       ) : (
-        <Link className="option" to="/signin">
+        <OptionLink className="option" to="/signin">
           SIGN IN
-        </Link>
+        </OptionLink>
       )}
       {currentUser ? (
-        <div className="option">
+        <OptionDiv className="option">
           <Link to="/checkout">{currentUser.displayName.toUpperCase()}</Link>
-        </div>
+        </OptionDiv>
       ) : null}
       <CartIcon />
-    </div>
+    </OptionsContainer>
     {hidden ? null : <CartDropDown />}
-  </div>
+  </HeaderContrainer>
 );
 /*const mapStateToProps = (state) => ({
   //this state is in root-reducer(file root-reducer)

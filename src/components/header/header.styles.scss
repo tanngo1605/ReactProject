@@ -1,5 +1,3 @@
-
-
 .header {
   height: 70px;
   width: 110%;
@@ -13,54 +11,41 @@
   z-index: 1;
   margin-top: 0.5em;
   font-weight: bold;
- // background-color: rgb(192, 186, 186);
-
-
-  
-   
-  
-
+  // background-color: rgb(192, 186, 186);
   .logo-container {
     height: 100%;
     width: 70px;
     padding: 20px;
-    
     align-items: center;
-     margin-left: 200px;
-   
+    margin-left: 200px;
   }
-  .logo-container{
-    .logo:hover{
-        transform: rotate(720deg);
-        transition: 10s;
+  .logo-container {
+    .logo:hover {
+      transform: rotate(720deg);
+      transition: 10s;
     }
-    .logo{
+    .logo {
       transform: rotate(-720deg);
       transition: 10s;
+    }
   }
-    
-  }
-  
-  
 
   .options {
     width: 50%;
     height: 100%;
     display: flex;
     align-items: center;
-    justify-content: flex-end;/*most right side*/
+    justify-content: flex-end; /*most right side*/
 
     .option {
       padding: 10px 15px;
       cursor: pointer;
-     
     }
     .option:hover {
       padding: 10px 15px;
       cursor: pointer;
       color: wheat;
       transition: 1s;
-     
     }
   }
 }
