@@ -14,7 +14,7 @@ export const HeaderContrainer = styled.div`
   margin-bottom: 2em;
   transition: 1s;
   top: 0px;
-  position: fixed;
+  position: absolute;
   right: 10px;
   z-index: 1;
   margin-top: 0.5em;
