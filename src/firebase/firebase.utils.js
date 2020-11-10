@@ -41,7 +41,10 @@ export const createUserProfile = async (userAuth, other) => {
   return userRef;
 };
 
-export const addCollectionsAndDocuments = async(collectionKey, objectToAdd) => {
+export const addCollectionsAndDocuments = async (
+  collectionKey,
+  objectToAdd
+) => {
   const collectionRef = firestore.collection(collectionKey);
   const batch = firestore.batch(); //If the connection is lost in half way, all the data of half will be deleted
   objectToAdd.forEach((e) => {
@@ -52,33 +55,42 @@ export const addCollectionsAndDocuments = async(collectionKey, objectToAdd) => {
   return await batch.commit();
 };
 
-export const convertCollectionsSnapshotToMap = (collections) =>{
-  const transformedCollection = collections.docs.map (doc =>{
-    const {title, items} = doc.data();
+export const convertCollectionsSnapshotToMap = (collections) => {
+  const transformedCollection = collections.docs.map((doc) => {
+    const { title, items } = doc.data();
 
     return {
-      routeName: encodeURI(title.toLowerCase()),   //Pass string and convert to URL can read
+      routeName: encodeURI(title.toLowerCase()), //Pass string and convert to URL can read
       id: doc.id,
       title,
-      items
-    }
-  })
+      items,
+    };
+  });
 
-  return transformedCollection.reduce((accumulator, collection) =>{
+  return transformedCollection.reduce((accumulator, collection) => {
     accumulator[collection.title.toLowerCase()] = collection; ///accumulate the object
     return accumulator;
-  }, {})
-}
+  }, {});
+};
+
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubcribe = auth.onAuthStateChanged((userAuth) => {
+      unsubcribe();
+      resolve(userAuth);
+    }, reject);
+  });
+};
 
 export const auth = firebase.auth();
 
 export const firestore = firebase.firestore();
 
-const provideer = new firebase.auth.GoogleAuthProvider();
+export const googleProvider = new firebase.auth.GoogleAuthProvider();
 
-provideer.setCustomParameters({ prompt: "select_account" });
+googleProvider.setCustomParameters({ prompt: "select_account" });
 
-export const signinWithGG = () => auth.signInWithPopup(provideer);
+export const signinWithGG = () => auth.signInWithPopup(googleProvider);
 
 export default firebase;
 
